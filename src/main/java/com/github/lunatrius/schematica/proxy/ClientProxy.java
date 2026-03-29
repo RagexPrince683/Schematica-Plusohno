@@ -412,9 +412,8 @@ public class ClientProxy extends CommonProxy {
 
         ChatEventHandler.INSTANCE.chatLines = 0;
 
-        // Printer defaults to off — it's not balanced for normal gameplay.
-        // Players should explicitly enable it when needed.
-        SchematicPrinter.INSTANCE.setEnabled(false);
+        // Turn on the printer again.
+        SchematicPrinter.INSTANCE.setEnabled(true);
 
         // Save schematics and area selection before clearing so they can be restored on next world load.
         // Use lastWorldServerName since the server may already be gone at this point.

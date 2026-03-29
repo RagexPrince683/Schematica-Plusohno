@@ -2,13 +2,9 @@ package com.github.lunatrius.schematica.client.world;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IWorldAccess;
 
-import com.github.lunatrius.core.util.vector.Vector3i;
-import com.github.lunatrius.schematica.client.renderer.RendererSchematicChunk;
 import com.github.lunatrius.schematica.client.renderer.RendererSchematicGlobal;
-import com.github.lunatrius.schematica.proxy.ClientProxy;
 
 public class SchematicUpdater implements IWorldAccess {
 
@@ -32,25 +28,7 @@ public class SchematicUpdater implements IWorldAccess {
 
     private void markBlocksForUpdate(final int x0, final int y0, final int z0, final int x1, final int y1,
         final int z1) {
-        final SchematicWorld schematic = ClientProxy.schematic;
-        if (schematic == null) {
-            return;
-        }
-
-        final Vector3i position = schematic.position;
-        final AxisAlignedBB boundingBox = AxisAlignedBB.getBoundingBox(
-            x0 - position.x,
-            y0 - position.y,
-            z0 - position.z,
-            x1 - position.x,
-            y1 - position.y,
-            z1 - position.z);
-        for (final RendererSchematicChunk renderer : RendererSchematicGlobal.INSTANCE.sortedRendererSchematicChunk) {
-            if (!renderer.getDirty() && renderer.getBoundingBox()
-                .intersectsWith(boundingBox)) {
-                renderer.setDirty();
-            }
-        }
+        RendererSchematicGlobal.INSTANCE.markDirtyAllSchematics(x0, y0, z0, x1, y1, z1);
     }
 
     @Override

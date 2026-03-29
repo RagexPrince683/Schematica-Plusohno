@@ -17,7 +17,7 @@ Default tool item is `minecraft:stick`.
 |-----|--------|
 | `M` | Open Schematic Management GUI |
 | `N` | Open Save Schematic GUI |
-| `Enter` | Execute current tool action (paste, fill, delete, replace) |
+| `Enter` | Execute current tool action (save, paste, fill, delete, replace) |
 | `LCTRL + Scroll` | Cycle tool mode (while holding tool item) |
 | Left Click | Set point A / Pick primary block (while holding tool item) |
 | Right Click | Set point B / Pick secondary block / Place schematic (while holding tool item) |
@@ -31,6 +31,10 @@ Otherwise, you would need to also install **[LunatriusCore](https://github.com/G
 ![play GTNH in multiplayer](temp.png)
 
 ---
+
+I'm currently working on other projects, so development is on hold for now.
+
+If you’d like to contribute to this enhanced mod, feel free to go ahead.
 
 ### Changes from GTNH-ver:
 - Added most functions from [Litematica](https://github.com/maruohon/litematica/), made it more user-friendly.

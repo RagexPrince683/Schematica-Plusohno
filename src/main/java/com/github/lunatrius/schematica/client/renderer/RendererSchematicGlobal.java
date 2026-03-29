@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.profiler.Profiler;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -106,10 +107,11 @@ public class RendererSchematicGlobal {
             if (RendererSchematicChunk.getCanUpdate()) {
                 this.rendererSchematicChunkComparator.setPosition(sw.position);
                 data.chunks.sort(this.rendererSchematicChunkComparator);
+                int updatedCount = 0;
                 for (RendererSchematicChunk chunk : data.chunks) {
                     if (chunk.getDirty()) {
                         chunk.updateRenderer();
-                        break;
+                        if (++updatedCount >= 3) break;
                     }
                 }
             }
@@ -349,6 +351,25 @@ public class RendererSchematicGlobal {
         for (SchematicRenderData data : renderDataMap.values()) {
             for (RendererSchematicChunk chunk : data.chunks) {
                 chunk.setDirty();
+            }
+        }
+    }
+
+    public void markDirtyAllSchematics(final int wx0, final int wy0, final int wz0, final int wx1, final int wy1, final int wz1) {
+        for (Map.Entry<SchematicWorld, SchematicRenderData> entry : renderDataMap.entrySet()) {
+            SchematicWorld sw = entry.getKey();
+            SchematicRenderData data = entry.getValue();
+            final AxisAlignedBB boundingBox = AxisAlignedBB.getBoundingBox(
+                wx0 - sw.position.x,
+                wy0 - sw.position.y,
+                wz0 - sw.position.z,
+                wx1 - sw.position.x,
+                wy1 - sw.position.y,
+                wz1 - sw.position.z);
+            for (RendererSchematicChunk renderer : data.chunks) {
+                if (!renderer.getDirty() && renderer.getBoundingBox().intersectsWith(boundingBox)) {
+                    renderer.setDirty();
+                }
             }
         }
     }
