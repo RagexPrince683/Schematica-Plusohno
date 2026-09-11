@@ -24,9 +24,15 @@ Default tool item is `minecraft:stick`.
 
 ---
 
-If you are playing on GTNH-2.8.4, you can simply replace `Schematica-1.12.6-GTNH.jar` with it.
+### Requirements and optional integrations
 
-Otherwise, you would need to also install **[LunatriusCore](https://github.com/GTNewHorizons/LunatriusCore/releases)**(>= 1.2.1-GTNH).
+- **Required:** Minecraft Forge 10.13.4.1614 for Minecraft 1.7.10.
+- **Not required:** LunatriusCore. Schematica Plus now contains its own internal implementations of the small set of
+  vector, GUI, and inventory utilities it uses.
+- **Optional:** The Lord of the Rings Mod integration is detected at runtime and remains optional.
+
+Schematica Plus does not register or bundle a replacement companion mod, so a separately installed LunatriusCore can
+coexist without package or resource conflicts.
 
 ![play GTNH in multiplayer](temp.png)
 
@@ -53,3 +59,20 @@ For example:
 - Store Coordinates & rotation of schematics per world/server. No more re-entering coordinates for large builds!
 - Fix heavy lag when having lotr armor stands/weapon racks in loaded schematic
 - Updated Chinese translation
+
+### Standalone implementation notes
+
+The former companion-library calls were replaced with mutable vectors under Schematica's own package, local base and
+numeric-field GUI controls, and direct vanilla inventory counting. Build dependencies and Forge metadata now require
+only Forge; LOTR remains a compile-only, runtime-optional integration. Client-only queue event handling is registered
+by the client proxy rather than being loaded during common dedicated-server initialization.
+
+This changes Java-facing types previously exposed by `CommonProxy`, `ClientProxy`, `SchematicWorld`, and renderer
+classes from `com.github.lunatrius.core.util.vector.*` to
+`com.github.lunatrius.schematica.util.vector.*`. Binary integrations compiled against those old signatures must be
+recompiled and update their imports. Schematic formats, NBT data, packet layouts, configuration keys, key bindings,
+and data file locations are unchanged.
+
+Verification for this change included source and resource searches for old imports, dependency declarations, and
+resource paths; review of common versus client proxy initialization; and Gradle source checks. No in-game runtime
+verification was performed.

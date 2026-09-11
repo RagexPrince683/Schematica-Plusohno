@@ -24,8 +24,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.github.lunatrius.core.util.vector.Vector3d;
-import com.github.lunatrius.core.util.vector.Vector3i;
+import com.github.lunatrius.schematica.util.vector.Vector3d;
+import com.github.lunatrius.schematica.util.vector.Vector3i;
 import com.github.lunatrius.schematica.api.ISchematic;
 import com.github.lunatrius.schematica.client.printer.SchematicPrinter;
 import com.github.lunatrius.schematica.client.renderer.RendererSchematicGlobal;
@@ -34,6 +34,7 @@ import com.github.lunatrius.schematica.compat.ILOTRPresent;
 import com.github.lunatrius.schematica.compat.NoLOTRProxy;
 import com.github.lunatrius.schematica.handler.ConfigurationHandler;
 import com.github.lunatrius.schematica.handler.client.ChatEventHandler;
+import com.github.lunatrius.schematica.handler.client.ClientQueueTickHandler;
 import com.github.lunatrius.schematica.handler.client.InputHandler;
 import com.github.lunatrius.schematica.handler.client.OverlayHandler;
 import com.github.lunatrius.schematica.handler.client.RenderTickHandler;
@@ -362,6 +363,9 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance()
             .bus()
             .register(TickHandler.INSTANCE);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(ClientQueueTickHandler.INSTANCE);
         FMLCommonHandler.instance()
             .bus()
             .register(RenderTickHandler.INSTANCE);

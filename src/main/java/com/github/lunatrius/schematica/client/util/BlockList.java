@@ -10,7 +10,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 
-import com.github.lunatrius.core.entity.EntityHelper;
 import com.github.lunatrius.schematica.client.world.SchematicWorld;
 import com.github.lunatrius.schematica.reference.Reference;
 
@@ -70,13 +69,21 @@ public class BlockList {
 
         for (WrappedItemStack wrappedItemStack : blockList) {
             if (player.capabilities.isCreativeMode) wrappedItemStack.inventory = -1;
-            else wrappedItemStack.inventory = EntityHelper.getItemCountInInventory(
-                player.inventory,
-                wrappedItemStack.itemStack.getItem(),
-                wrappedItemStack.itemStack.getItemDamage());
+            else wrappedItemStack.inventory = getItemCountInInventory(player, wrappedItemStack.itemStack);
         }
 
         return blockList;
+    }
+
+    private int getItemCountInInventory(EntityPlayer player, ItemStack requiredStack) {
+        int count = 0;
+        for (ItemStack inventoryStack : player.inventory.mainInventory) {
+            if (inventoryStack != null && inventoryStack.getItem() == requiredStack.getItem()
+                && inventoryStack.getItemDamage() == requiredStack.getItemDamage()) {
+                count += inventoryStack.stackSize;
+            }
+        }
+        return count;
     }
 
     private WrappedItemStack findOrCreateWrappedItemStackFor(final List<WrappedItemStack> blockList,
