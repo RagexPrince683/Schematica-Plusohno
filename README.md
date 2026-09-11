@@ -63,9 +63,11 @@ For example:
 ### Standalone implementation notes
 
 The former companion-library calls were replaced with mutable vectors under Schematica's own package, local base and
-numeric-field GUI controls, and direct vanilla inventory counting. Build dependencies and Forge metadata now require
-only Forge; LOTR remains a compile-only, runtime-optional integration. Client-only queue event handling is registered
-by the client proxy rather than being loaded during common dedicated-server initialization.
+numeric-field GUI controls, and direct vanilla inventory counting. The numeric control retains editable text entry,
+bounded increment/decrement buttons, disabled-state handling, and owner-screen change events. Vector conversions retain
+the original floor semantics. Build dependencies and Forge metadata now require only Forge; LOTR remains a compile-only,
+runtime-optional integration. Client-only queue event handling is registered by the client proxy rather than being
+loaded during common dedicated-server initialization.
 
 This changes Java-facing types previously exposed by `CommonProxy`, `ClientProxy`, `SchematicWorld`, and renderer
 classes from `com.github.lunatrius.core.util.vector.*` to
@@ -73,6 +75,7 @@ classes from `com.github.lunatrius.core.util.vector.*` to
 recompiled and update their imports. Schematic formats, NBT data, packet layouts, configuration keys, key bindings,
 and data file locations are unchanged.
 
-Verification for this change included source and resource searches for old imports, dependency declarations, and
-resource paths; review of common versus client proxy initialization; and Gradle source checks. No in-game runtime
-verification was performed.
+The supplied LunatriusCore tree is retained only as a source reference: it is not a Gradle subproject, source set,
+resource input, dependency, or packaged component. Verification for this change included source and resource searches
+for old imports, dependency declarations, and resource paths; review of common versus client proxy initialization; and
+static review of the GUI event and vector conversion paths. No in-game runtime verification was performed.

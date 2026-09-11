@@ -53,10 +53,9 @@ public class GuiSchematicSave extends GuiScreenBase {
 
     @Override
     public void initGui() {
+        super.initGui();
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-
-        this.buttonList.clear();
 
         int id = 0;
 

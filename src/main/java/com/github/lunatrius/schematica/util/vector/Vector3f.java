@@ -26,6 +26,22 @@ public class Vector3f implements Cloneable {
         return set(vector.x, vector.y, vector.z);
     }
 
+    public Vector3i toVector3i() {
+        return toVector3i(new Vector3i());
+    }
+
+    public Vector3i toVector3i(Vector3i destination) {
+        return destination.set((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z));
+    }
+
+    public Vector3d toVector3d() {
+        return toVector3d(new Vector3d());
+    }
+
+    public Vector3d toVector3d(Vector3d destination) {
+        return destination.set(this.x, this.y, this.z);
+    }
+
     @Override
     public Vector3f clone() {
         return new Vector3f(this.x, this.y, this.z);
