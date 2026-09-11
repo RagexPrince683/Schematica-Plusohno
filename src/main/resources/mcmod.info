@@ -1,11 +1,11 @@
 [{
 	"modid": "${modId}",
 	"name": "${modName}",
-	"description": "Import and export Minecraft schematic files in Minecraft!",
+	"description": "Import and export Minecraft schematic files in Minecraft! - No core mods edition!",
 	"version": "${modVersion}",
 	"mcversion": "${minecraftVersion}",
-	"authorList": ["Lunatrius"],
-	"credits": "AbrarSyed, Adaptivity, AtomicBlom, bilde2910, bombcar, cltnschlosser, inpixies, Johann Bernhardt, Kamesuta, Kiwi233, MattBDev, mist475, Moravuscz, qb20nh, ShaRose, Tatara88, ThranMaru, UltraMoogleMan",
+	"authorList": ["RagexPrince683","Lunatrius"],
+	"credits": "RagexPrince683, AbrarSyed, Adaptivity, AtomicBlom, bilde2910, bombcar, cltnschlosser, inpixies, Johann Bernhardt, Kamesuta, Kiwi233, MattBDev, mist475, Moravuscz, qb20nh, ShaRose, Tatara88, ThranMaru, UltraMoogleMan",
 	"dependants": [  ],
 	"dependencies": [ "Forge@[10.13.4.1614,)" ],
 	"parent": "",
@@ -13,6 +13,6 @@
 	"logoFile": "/assets/schematica/logo.png",
 	"screenshots": [  ],
 	"updateUrl": "",
-	"url": "http://mc.lunatri.us/",
+	"url": "https://github.com/RagexPrince683/Schematica-Plusohno",
 	"useDependencyInformation": true
 }]
