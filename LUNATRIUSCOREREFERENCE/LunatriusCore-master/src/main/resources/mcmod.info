@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "A collection of utilities for Lunatrius' mods.",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "http://mc.lunatri.us/",
+		"updateUrl": "",
+		"authorList": ["Lunatrius"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]
