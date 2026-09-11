@@ -3,8 +3,6 @@ package com.github.lunatrius.schematica.handler;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 
@@ -25,25 +23,6 @@ public class QueueTickHandler {
     private QueueTickHandler() {}
 
     @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            return;
-        }
-
-        // TODO: find a better way... maybe?
-        try {
-            final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-            if (player != null && player.sendQueue != null
-                && !player.sendQueue.getNetworkManager()
-                    .isLocalChannel()) {
-                processQueue();
-            }
-        } catch (Exception e) {
-            Reference.logger.error("Something went wrong...", e);
-        }
-    }
-
-    @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             return;
@@ -52,7 +31,7 @@ public class QueueTickHandler {
         processQueue();
     }
 
-    private void processQueue() {
+    public void processQueue() {
         if (this.queue.isEmpty()) {
             return;
         }
