@@ -52,12 +52,27 @@ public class Vector3d implements Cloneable {
         return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 
+    public double lengthSquaredTo(Vector3d vector) {
+        double deltaX = this.x - vector.x;
+        double deltaY = this.y - vector.y;
+        double deltaZ = this.z - vector.z;
+        return deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
+    }
+
     public Vector3i toVector3i() {
-        return new Vector3i((int) this.x, (int) this.y, (int) this.z);
+        return toVector3i(new Vector3i());
+    }
+
+    public Vector3i toVector3i(Vector3i destination) {
+        return destination.set((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z));
     }
 
     public Vector3f toVector3f() {
-        return new Vector3f((float) this.x, (float) this.y, (float) this.z);
+        return toVector3f(new Vector3f());
+    }
+
+    public Vector3f toVector3f(Vector3f destination) {
+        return destination.set((float) Math.floor(this.x), (float) Math.floor(this.y), (float) Math.floor(this.z));
     }
 
     @Override
